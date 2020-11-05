@@ -44,4 +44,17 @@ public class PasswordServiceImpl implements PasswordService {
         }
 
     }
+
+    @Override
+    public RequestObjectDto createSecurePasswordWithSalt(RequestObjectDto requestObjectDto) {
+        try {
+            RequestObjectDto newPassword = new RequestObjectDto();
+            newPassword.setPassword(passwordGenerator
+                    .hashPassword(passwordGenerator.generateBase64PasswordWithCustomSalt(requestObjectDto.getPassword(),requestObjectDto.getSalt())));
+            return newPassword;
+        } catch (NoSuchAlgorithmException e){
+            LOGGER.error("Can't generate password");
+            throw new SecretStashException("Problem generating password");
+        }
+    }
 }

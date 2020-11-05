@@ -25,6 +25,15 @@ public class PasswordGenerator {
         return Base64.getUrlEncoder().withoutPadding().encodeToString(newPassword);
     }
 
+    public String generateBase64PasswordWithCustomSalt(String password, String salt) {
+        if(salt == null){
+            salt = "";
+        }
+        String saltedPassword = password + salt;
+        byte[] newPassword = saltedPassword.getBytes();
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(newPassword);
+    }
+
     public String hashPassword(String newPassword) throws NoSuchAlgorithmException {
         byte[] bytes = newPassword.getBytes(StandardCharsets.US_ASCII);
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
