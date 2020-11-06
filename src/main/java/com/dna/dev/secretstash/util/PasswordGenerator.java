@@ -57,9 +57,9 @@ public class PasswordGenerator {
         if(!matcher.find()){
             result += result + "!";
         }
-        if(result.length() > 50){
+        if(result.length() > 48){
             StringBuilder shortenPassword = new StringBuilder();
-            for(int i = 0; i < 49; i++){
+            for(int i = 0; i < 48; i++){
                 shortenPassword.append(result.charAt(i));
             }
             shortenPassword.append("!");
