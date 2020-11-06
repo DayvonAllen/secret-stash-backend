@@ -37,4 +37,10 @@ public class PasswordController {
         WebFilter webFilter = new WebFilter();
         return webFilter.webFilter("BeanFilter", passwordService.createSecurePasswordWithSalt(requestObjectDto), "password");
     }
+
+    @PostMapping(value = "short", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public MappingJacksonValue createSecurePasswordWithSalt20(@RequestBody RequestObjectDto requestObjectDto){
+        WebFilter webFilter = new WebFilter();
+        return webFilter.webFilter("BeanFilter", passwordService.createSecurePasswordWithSalt20(requestObjectDto), "password");
+    }
 }

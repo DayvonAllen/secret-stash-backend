@@ -7,6 +7,7 @@ public interface PasswordService {
     RequestObjectDto getRandomPassword();
     RequestObjectDto createSecurePassword(RequestObjectDto requestObjectDto);
     RequestObjectDto createSecurePasswordWithSalt(RequestObjectDto requestObjectDto);
+    RequestObjectDto createSecurePasswordWithSalt20(RequestObjectDto requestObjectDto);
 
 
 }
