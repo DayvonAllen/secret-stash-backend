@@ -9,6 +9,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class PasswordGenerator {
@@ -49,7 +51,13 @@ public class PasswordGenerator {
         messageDigest.update(bytes);
         byte[] digest = messageDigest.digest();
 
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
+        String result = Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
+        Pattern regex = Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = regex.matcher(result);
+        if(!matcher.find()){
+            result += result + "!";
+        }
+        return result;
     }
 
     public String hashPassword20(String newPassword) throws NoSuchAlgorithmException {
@@ -62,6 +70,14 @@ public class PasswordGenerator {
         for(int i = 0; i < 20; i++){
             password.append(result.charAt(i));
         }
+
+        Pattern regex = Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = regex.matcher(password);
+
+        if(!matcher.find()){
+            password.append("!");
+        }
+
         return password.toString();
     }
 
