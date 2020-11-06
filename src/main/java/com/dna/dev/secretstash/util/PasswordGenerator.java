@@ -57,7 +57,16 @@ public class PasswordGenerator {
         if(!matcher.find()){
             result += result + "!";
         }
-        return result;
+        if(result.length() > 50){
+            StringBuilder shortenPassword = new StringBuilder();
+            for(int i = 0; i < 49; i++){
+                shortenPassword.append(result.charAt(i));
+            }
+            shortenPassword.append("!");
+            return shortenPassword.toString();
+        } else {
+            return result;
+        }
     }
 
     public String hashPassword20(String newPassword) throws NoSuchAlgorithmException {
